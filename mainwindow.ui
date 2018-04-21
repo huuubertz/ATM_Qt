@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>162</width>
-    <height>86</height>
+    <width>180</width>
+    <height>80</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,8 +19,8 @@
      <rect>
       <x>20</x>
       <y>10</y>
-      <width>41</width>
-      <height>28</height>
+      <width>40</width>
+      <height>30</height>
      </rect>
     </property>
     <property name="text">
@@ -30,10 +30,23 @@
    <widget class="QPushButton" name="pushButton_2">
     <property name="geometry">
      <rect>
-      <x>80</x>
+      <x>70</x>
       <y>10</y>
-      <width>41</width>
-      <height>28</height>
+      <width>40</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_3">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>10</y>
+      <width>40</width>
+      <height>30</height>
      </rect>
     </property>
     <property name="text">

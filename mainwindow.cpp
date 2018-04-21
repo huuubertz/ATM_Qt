@@ -125,3 +125,50 @@ void MainWindow::on_pushButton_2_clicked(bool checked)
     window_atm->show();
 
 }
+
+void MainWindow::on_pushButton_3_clicked(bool checked)
+{
+    // create window for keyboard
+    QWidget* window_keyboard = new QWidget;
+    window_keyboard->setFixedSize(220, 140);
+
+    // create button for keyboard
+    QPushButton *_button_card_1 = new QPushButton("7",window_keyboard);
+    _button_card_1->setGeometry(10,10,60,30);
+
+    QPushButton *_button_card_2 = new QPushButton("4",window_keyboard);
+    _button_card_2->setGeometry(10,40,60,30);
+
+    QPushButton *_button_card_3 = new QPushButton("1",window_keyboard);
+    _button_card_3->setGeometry(10,70,60,30);
+
+    QPushButton *_button_card_4 = new QPushButton("OK",window_keyboard);
+    _button_card_4->setGeometry(10,100,60,30);
+
+    QPushButton *_button_card_5 = new QPushButton("8",window_keyboard);
+    _button_card_5->setGeometry(80,10,60,30);
+
+    QPushButton *_button_card_6 = new QPushButton("5",window_keyboard);
+    _button_card_6->setGeometry(80,40,60,30);
+
+    QPushButton *_button_card_7 = new QPushButton("2",window_keyboard);
+    _button_card_7->setGeometry(80,70,60,30);
+
+    QPushButton *_button_card_8 = new QPushButton("0",window_keyboard);
+    _button_card_8->setGeometry(80,100,60,30);
+
+    QPushButton *_button_card_9 = new QPushButton("9",window_keyboard);
+    _button_card_9->setGeometry(150,10,60,30);
+
+    QPushButton *_button_card_10 = new QPushButton("6",window_keyboard);
+    _button_card_10->setGeometry(150,40,60,30);
+
+    QPushButton *_button_card_11 = new QPushButton("3",window_keyboard);
+    _button_card_11->setGeometry(150,70,60,30);
+
+    QPushButton *_button_card_12 = new QPushButton("CANCLE",window_keyboard);
+    _button_card_12->setGeometry(150,100,60,30);
+
+    window_keyboard->show();
+
+}
