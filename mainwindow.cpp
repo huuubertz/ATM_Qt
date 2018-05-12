@@ -13,6 +13,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect (ui->pushButton, SIGNAL (clicked(bool)), this, SLOT (on_pushButton_clicked));
     connect (ui->pushButton_2, SIGNAL (clicked(bool)), this, SLOT (on_pushButton_clicked));
+
+
 }
 
 MainWindow::~MainWindow()
@@ -39,6 +41,8 @@ void MainWindow::on_pushButton_clicked(bool checked)
 
     QPushButton *_button_card_3 = new QPushButton("Card 3",window_card);
     _button_card_3->setGeometry(10,70,280,30);
+
+
 
     window_card->show();
 }
@@ -81,7 +85,7 @@ void MainWindow::on_pushButton_2_clicked(bool checked)
     QPushButton *_button_card_to_get_receipt = new QPushButton("Get receipt",window_atm);
     _button_card_to_get_receipt->setGeometry(10,130,100,30);
 
-    // create push button to col;ect money from atm
+    // create push button to colect money from atm
     QPushButton *_button_card_10 = new QPushButton("Collect money",window_atm);
     _button_card_10->setGeometry(60,160,280,30);
 
