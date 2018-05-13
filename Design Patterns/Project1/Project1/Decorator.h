@@ -52,11 +52,6 @@ public:
 		std::cout << "Euro wrapper" << std::endl;
 	}
 
-	void set_password(char _pass){ std::cout << "Euro wrapper" << std::endl; }
-	int get_Id(){ return 2; }
-	char* get_passowrd(){ return; }
-	void konto_walutowe(){ std::cout << "Euro wrapper" << std::endl; }
-
 };
 
 

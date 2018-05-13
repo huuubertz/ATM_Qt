@@ -23,7 +23,7 @@ int main(){
 	decyzja->add_new_account_to_data_base(karta[0]);
 	*/
 
-	Card* karta = new Wrapper_euro(new Wrapper_pln);
+	//Card* karta = new Wrapper_euro(new Wrapper_pln);
 	system("pause");
 	return 0;
 }
