@@ -4,6 +4,9 @@
 #include <QPushButton>
 #include <QLabel>
 #include <QTextBrowser>
+#include <QLineEdit>
+#include <QMessageBox>
+
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -11,9 +14,11 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    connect (ui->pushButton, SIGNAL (clicked(bool)), this, SLOT (on_pushButton_clicked));
-    connect (ui->pushButton_2, SIGNAL (clicked(bool)), this, SLOT (on_pushButton_clicked));
+    // -------------------------------------------- LogIn window ---------------------------------------------------------
+    // ustawiamy maxymalna liczbe znakow, PIN = 4 znaki
+    ui->line_password->setMaxLength(4);
 
+    // -------------------------------------------- Signals -------------------------------------------------------
 
 }
 
@@ -22,32 +27,157 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+// ---------------------- KLAWAITURA ----------------------------------------------
 /*
- *   QWidget *window_card = new QWidget;
-        window_card->setFixedSize(100,50);
-        window_card->show();
+void MainWindow::on_pushButton_3_clicked(bool checked)
+{
+    // create window for keyboard
+    QWidget* window_keyboard = new QWidget;
+    window_keyboard->setFixedSize(220, 140);
+
+    // create button for keyboard
+    QPushButton *_button_card_1 = new QPushButton("7",window_keyboard);
+    _button_card_1->setGeometry(10,10,60,30);
+
+    QPushButton *_button_card_2 = new QPushButton("4",window_keyboard);
+    _button_card_2->setGeometry(10,40,60,30);
+
+    QPushButton *_button_card_3 = new QPushButton("1",window_keyboard);
+    _button_card_3->setGeometry(10,70,60,30);
+
+    QPushButton *_button_card_4 = new QPushButton("OK",window_keyboard);
+    _button_card_4->setGeometry(10,100,60,30);
+
+    QPushButton *_button_card_5 = new QPushButton("8",window_keyboard);
+    _button_card_5->setGeometry(80,10,60,30);
+
+    QPushButton *_button_card_6 = new QPushButton("5",window_keyboard);
+    _button_card_6->setGeometry(80,40,60,30);
+
+    QPushButton *_button_card_7 = new QPushButton("2",window_keyboard);
+    _button_card_7->setGeometry(80,70,60,30);
+
+    QPushButton *_button_card_8 = new QPushButton("0",window_keyboard);
+    _button_card_8->setGeometry(80,100,60,30);
+
+    QPushButton *_button_card_9 = new QPushButton("9",window_keyboard);
+    _button_card_9->setGeometry(150,10,60,30);
+
+    QPushButton *_button_card_10 = new QPushButton("6",window_keyboard);
+    _button_card_10->setGeometry(150,40,60,30);
+
+    QPushButton *_button_card_11 = new QPushButton("3",window_keyboard);
+    _button_card_11->setGeometry(150,70,60,30);
+
+    QPushButton *_button_card_12 = new QPushButton("CANCLE",window_keyboard);
+    _button_card_12->setGeometry(150,100,60,30);
+
+    window_keyboard->show();
+
+}
+*/
+
+// ------------------------------------ LOGIN WINDOW -----------------------------------------------------
+
+void MainWindow::on_pushButton_ok_logIn_clicked(bool checked)
+{
+
+    // to do unVISIBLE password entered
+
+    // pobierz dane z textboxa po wcisnieciu ok
+    QString password = ui->line_password->text();
+
+    // if checkbox 1 jest zaznaczony to ...
+
+    if(ui->checkBox_card_1->isChecked() == true)
+    {
+        if(password == "1234")
+        {
+             QMessageBox::information(this, "password", "Zostales pomyslnie zalogowany");
+             //Server::_ATM_menu_visibility=true;
+
+             // ukryj okno logowania
+             MainWindow::setVisible(false);
+             // otworz dostep do menu
+             MainWindow::main_menu();
+
+        }
+        else QMessageBox::information(this, "password", "haslo jest NIEprawidlowe");
+        // stworz obiekt karty 1 ustaw jakies przykladowe haslo
+        // if dobre to ustaw zmienna globalna na true iiiii poruszaj sie po interfejsie bankomatu
+        // pasuje przerobic to bo pierwsz if check box zrob to i to i dopiero wtedy w tym ifie kolejny if sprawdzajacy haslo jak sie kliknie guzika
+    }
+
+    // if checkbox 2 jest zaznaczony to ...
+
+    if(ui->checkBox_card_2->isChecked() == true)
+    {
+        /*
+        if (Server::_ATM_menu_visibility == true)
+        {
+            QMessageBox::information(this, "password", "zmienna dziala jak FIKS");
+        }
         */
 
-void MainWindow::on_pushButton_clicked(bool checked)
-{
-    QWidget *window_card = new QWidget;
-    window_card->setFixedSize(300,130);
+        if(password == "2345")
+        {
+            QMessageBox::information(this, "password", "Zostales pomyslnie zalogowany");
 
-    QPushButton *_button_card_1 = new QPushButton("Card 1",window_card);
-    _button_card_1->setGeometry(10,10,280,30);
+            // ukryj okno logowania
+            MainWindow::setVisible(false);
+            // otworz dostep do menu
+            MainWindow::main_menu();
 
-    QPushButton *_button_card_2 = new QPushButton("Card 2",window_card);
-    _button_card_2->setGeometry(10,40,280,30);
+        }
+        else QMessageBox::information(this, "password", "haslo jest NIEprawidlowe");
+    }
 
-    QPushButton *_button_card_3 = new QPushButton("Card 3",window_card);
-    _button_card_3->setGeometry(10,70,280,30);
+    // if checkbox 3 jest zaznaczony to ...
 
+    if(ui->checkBox_card_3->isChecked() == true)
+    {
+        if(password == "3456")
+        {
+             QMessageBox::information(this, "password", "Zostales pomyslnie zalogowany");
 
+             // ukryj okno logowania
+             MainWindow::setVisible(false);
+             // otworz dostep do menu
+             MainWindow::main_menu();
 
-    window_card->show();
+        }
+        else QMessageBox::information(this, "password", "haslo jest NIEprawidlowe");
+    }
+
 }
 
-void MainWindow::on_pushButton_2_clicked(bool checked)
+void MainWindow::on_checkBox_card_1_stateChanged(int arg1)
+{
+    if(ui->checkBox_card_1->isChecked() == true){
+        ui->checkBox_card_2->setChecked(false);
+        ui->checkBox_card_3->setChecked(false);
+    }
+}
+
+void MainWindow::on_checkBox_card_2_stateChanged(int arg1)
+{
+    if(ui->checkBox_card_2->isChecked() == true){
+        ui->checkBox_card_1->setChecked(false);
+        ui->checkBox_card_3->setChecked(false);
+    }
+}
+
+void MainWindow::on_checkBox_card_3_stateChanged(int arg1)
+{
+    if(ui->checkBox_card_3->isChecked() == true){
+        ui->checkBox_card_1->setChecked(false);
+        ui->checkBox_card_2->setChecked(false);
+    }
+}
+
+// -------------------------------- MAIN WINDOW OF ATM ------------------------------------------------------------------
+
+void MainWindow::main_menu()
 {
     QWidget* window_atm = new QWidget;
     window_atm->setFixedSize(400, 230);
@@ -127,52 +257,5 @@ void MainWindow::on_pushButton_2_clicked(bool checked)
 
 
     window_atm->show();
-
 }
 
-void MainWindow::on_pushButton_3_clicked(bool checked)
-{
-    // create window for keyboard
-    QWidget* window_keyboard = new QWidget;
-    window_keyboard->setFixedSize(220, 140);
-
-    // create button for keyboard
-    QPushButton *_button_card_1 = new QPushButton("7",window_keyboard);
-    _button_card_1->setGeometry(10,10,60,30);
-
-    QPushButton *_button_card_2 = new QPushButton("4",window_keyboard);
-    _button_card_2->setGeometry(10,40,60,30);
-
-    QPushButton *_button_card_3 = new QPushButton("1",window_keyboard);
-    _button_card_3->setGeometry(10,70,60,30);
-
-    QPushButton *_button_card_4 = new QPushButton("OK",window_keyboard);
-    _button_card_4->setGeometry(10,100,60,30);
-
-    QPushButton *_button_card_5 = new QPushButton("8",window_keyboard);
-    _button_card_5->setGeometry(80,10,60,30);
-
-    QPushButton *_button_card_6 = new QPushButton("5",window_keyboard);
-    _button_card_6->setGeometry(80,40,60,30);
-
-    QPushButton *_button_card_7 = new QPushButton("2",window_keyboard);
-    _button_card_7->setGeometry(80,70,60,30);
-
-    QPushButton *_button_card_8 = new QPushButton("0",window_keyboard);
-    _button_card_8->setGeometry(80,100,60,30);
-
-    QPushButton *_button_card_9 = new QPushButton("9",window_keyboard);
-    _button_card_9->setGeometry(150,10,60,30);
-
-    QPushButton *_button_card_10 = new QPushButton("6",window_keyboard);
-    _button_card_10->setGeometry(150,40,60,30);
-
-    QPushButton *_button_card_11 = new QPushButton("3",window_keyboard);
-    _button_card_11->setGeometry(150,70,60,30);
-
-    QPushButton *_button_card_12 = new QPushButton("CANCLE",window_keyboard);
-    _button_card_12->setGeometry(150,100,60,30);
-
-    window_keyboard->show();
-
-}

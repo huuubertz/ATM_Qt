@@ -28,7 +28,10 @@ SOURCES += \
         mainwindow.cpp
 
 HEADERS += \
-        mainwindow.h
+        mainwindow.h \
+    Card.h \
+    Decorator.h \
+    Singleton.h
 
 FORMS += \
         mainwindow.ui

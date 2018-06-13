@@ -4,7 +4,7 @@
 #include <iostream>
 #include "factory.h"
 
-class Wrapper{
+class Wrapper:public Card{
 private:
 	Card *m_karta;
 public:
@@ -18,26 +18,28 @@ public:
 	}
 };
 
-class Wrapper_pln :public Card{
+class Wrapper_pln :public Wrapper{
 public:
+	Wrapper_pln(Card* _card) : Wrapper(_card)
+	{
+		
+	}
+
 	~Wrapper_pln()
 	{
 		std::cout << "PLN delete" << std::endl;
 	}
 
 	void konto_walutowe(){
+		Wrapper::konto_walutowe();
 		std::cout << "PLN" << ", ";
 	}
 
-	void set_password(char _pass){ std::cout << "Euro wrapper" << std::endl; }
-	int get_Id(){ return 2; }
-	char* get_passowrd(){ return; }
-	void konto_walutowe(){ std::cout << "Euro wrapper" << std::endl; }
 };
 
 class Wrapper_euro :public Wrapper{
 public:
-	Wrapper_euro(Card *karta) : Wrapper(karta)
+	Wrapper_euro(Card *_card) : Wrapper(_card)
 	{
 
 	}
