@@ -233,27 +233,27 @@ void MainWindow::main_menu()
     QLabel* label_3 = new QLabel("", window_atm);
     label_3->setGeometry(70, 70, 50, 30);
 
-    QLabel* label_4 = new QLabel("", window_atm);
-    label_4->setGeometry(70, 100, 50, 30);
+    QLabel* label_4 = new QLabel("inne uslugi", window_atm);
+    label_4->setGeometry(70, 100, 70, 30);
 
-    QLabel* label_5 = new QLabel("", window_atm);
-    label_5->setGeometry(290, 10, 50, 30);
+    QLabel* label_5 = new QLabel("wyplata 50 PLN \n bez wydruku", window_atm);
+    label_5->setGeometry(250, 10, 100, 30);
 
-    QLabel* label_6 = new QLabel("", window_atm);
-    label_6->setGeometry(290, 40, 50, 30);
+    QLabel* label_6 = new QLabel("Wyplata gotowki \n w PLN", window_atm);
+    label_6->setGeometry(270, 40, 50, 30);
 
-    QLabel* label_7 = new QLabel("", window_atm);
-    label_7->setGeometry(290, 70, 50, 30);
+    QLabel* label_7 = new QLabel("Zapytanie \n o saldo", window_atm);
+    label_7->setGeometry(270, 70, 70, 30);
 
-    QLabel* label_8 = new QLabel("", window_atm);
-    label_8->setGeometry(290, 100, 50, 30);
+    QLabel* label_8 = new QLabel("Wyplata \n gotowki", window_atm);
+    label_8->setGeometry(270, 100, 70, 30);
 
     // create text browers to display information about
     // login, wrong pin, or your decision
 
-    QTextBrowser* text_browser_1 = new QTextBrowser(window_atm);
-    text_browser_1->setGeometry(130,40,150,70);
-    text_browser_1->setText("Welcone in ATM :-) \n Put Card to start sesion. \n");
+    //QTextBrowser* text_browser_1 = new QTextBrowser(window_atm);
+    //text_browser_1->setGeometry(130,40,150,70);
+    //text_browser_1->setText("Welcone in ATM :-) \n Put Card to start sesion. \n");
 
 
     window_atm->show();
