@@ -6,7 +6,7 @@
 using namespace std;
 
 int main() {
-
+	/*
 	//Card* card_1 = new Wrapper_PL(new Card_individual);
 
 	//Card* card_2 = new Card_individual;
@@ -37,6 +37,34 @@ int main() {
 	//card_1->about_account();
 
 	//cout << card_1->get_password << endl;
+	*/
+
+	// test generatora id
+
+	Card* _karta;
+	Factory* factory = NULL;
+
+	_karta = factory->create_individual_card();
+	// pokaz ID
+	cout << _karta->get_ID() << endl;
+
+	Card* _karta_2;
+
+	_karta_2 = factory->create_individual_card();
+	// pokaz ID
+	cout << _karta_2->get_ID() << endl;
+
+	// przypadek gdy tworzymy tablice kart
+
+	Card* _card[10];
+
+	for (int i = 0; i <= 9; i++)
+	{
+		_card[i] = factory->create_individual_card();
+		cout << _card[i]->get_ID() << endl;
+	}
+
+
 
 	system("pause");
 	return 0;

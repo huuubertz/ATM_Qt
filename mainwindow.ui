@@ -54,7 +54,11 @@
             </layout>
            </item>
            <item>
-            <widget class="QLineEdit" name="line_password"/>
+            <widget class="QLineEdit" name="line_password">
+             <property name="inputMethodHints">
+              <set>Qt::ImhNone</set>
+             </property>
+            </widget>
            </item>
           </layout>
          </item>

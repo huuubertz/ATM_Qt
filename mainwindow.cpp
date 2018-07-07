@@ -7,6 +7,11 @@
 #include <QLineEdit>
 #include <QMessageBox>
 
+    // My libs
+#include "Singleton.h"
+#include "Card.h"
+#include "Decorator.h"
+
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -17,6 +22,7 @@ MainWindow::MainWindow(QWidget *parent) :
     // -------------------------------------------- LogIn window ---------------------------------------------------------
     // ustawiamy maxymalna liczbe znakow, PIN = 4 znaki
     ui->line_password->setMaxLength(4);
+    ui->line_password->setEchoMode(QLineEdit::Password);
 
     // -------------------------------------------- Signals -------------------------------------------------------
 
@@ -81,6 +87,15 @@ void MainWindow::on_pushButton_3_clicked(bool checked)
 
 void MainWindow::on_pushButton_ok_logIn_clicked(bool checked)
 {
+    // SPR. czy klasy odpowiadajace za tworzenie kard, serwer i dekoartor dzialaja
+    Card* _karta = NULL;
+    Factory* _factory = NULL;
+
+    _karta = _factory->create_individual_card();
+
+    _karta->set_password(1234);
+
+
 
     // to do unVISIBLE password entered
 
