@@ -6,6 +6,7 @@
 #include <QTextBrowser>
 #include <QLineEdit>
 #include <QMessageBox>
+#include <string>
 
     // My libs
 #include "Singleton.h"
@@ -93,7 +94,10 @@ void MainWindow::on_pushButton_ok_logIn_clicked(bool checked)
 
     _karta = _factory->create_individual_card();
 
-    _karta->set_password(1234);
+    _karta->set_password(1224);
+
+    std::string haslo = std::to_string(_karta->get_password());
+    QString qhaslo = QString::fromStdString(haslo);
 
 
 
@@ -106,7 +110,7 @@ void MainWindow::on_pushButton_ok_logIn_clicked(bool checked)
 
     if(ui->checkBox_card_1->isChecked() == true)
     {
-        if(password == "1234")
+        if(password == qhaslo)
         {
              QMessageBox::information(this, "password", "Zostales pomyslnie zalogowany");
              //Server::_ATM_menu_visibility=true;

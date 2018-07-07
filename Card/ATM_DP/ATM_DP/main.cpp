@@ -1,7 +1,10 @@
 #include <iostream>
+#include <string>
+
 #include "Card.h"
 #include "Decorator.h"
 #include "Singleton.h"
+
 
 using namespace std;
 
@@ -47,6 +50,7 @@ int main() {
 	_karta = factory->create_individual_card();
 	// pokaz ID
 	cout << _karta->get_ID() << endl;
+	_karta->set_password(6789);
 
 	Card* _karta_2;
 
@@ -63,6 +67,20 @@ int main() {
 		_card[i] = factory->create_individual_card();
 		cout << _card[i]->get_ID() << endl;
 	}
+
+	// haslo z int na string4
+	string haslo = to_string(_karta->get_password());
+
+	cout << haslo << endl;
+
+	// Tworzymy obiekt typu Server, ktory bedzie udawal baze danych
+	Server* server = Server::instance();
+
+	// Dodajemy stworzon¹ wyzej karte do bazy danych
+	server->add_new_account_to_database(_card[0]);
+
+
+
 
 
 
