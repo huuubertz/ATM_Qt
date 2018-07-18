@@ -13,6 +13,7 @@
 #include "Card.h"
 #include "Decorator.h"
 
+Server* Server::_instance = 0;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -26,6 +27,22 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->line_password->setEchoMode(QLineEdit::Password);
 
     // -------------------------------------------- Signals -------------------------------------------------------
+
+    // -------------------------------------------- Server --------------------------------------------------------
+
+    Server* _server = Server::instance();
+
+    Card* _karta = NULL;
+    Factory* _factory = NULL;
+
+    _karta = _factory->create_individual_card();
+
+    _karta->set_password(1254);
+
+    std::string haslo = std::to_string(_karta->get_password());
+    QString qhaslo = QString::fromStdString(haslo);
+
+    _server->add_new_account_to_database(_karta);
 
 }
 
@@ -94,10 +111,25 @@ void MainWindow::on_pushButton_ok_logIn_clicked(bool checked)
 
     _karta = _factory->create_individual_card();
 
-    _karta->set_password(1224);
+    _karta->set_password(1254);
 
     std::string haslo = std::to_string(_karta->get_password());
     QString qhaslo = QString::fromStdString(haslo);
+
+    Card* _card[2];
+    std::string _pin[2];
+    QString _QPin[2];
+
+    for (int i = 0 ;i < 2 ; i++) {
+        _card[i] = _factory->create_individual_card();
+
+        // odczytaj i zrzutuj haslo na QString
+        _card[i]->set_password(1234);
+        std::string _pin[i] = std::to_string(_card[i]->get_password());
+        QString _QPin[i] = QString::fromStdString(_pin[i]);
+    }
+
+
 
 
 
@@ -138,7 +170,7 @@ void MainWindow::on_pushButton_ok_logIn_clicked(bool checked)
         }
         */
 
-        if(password == "2345")
+        if(password == _QPin[1])
         {
             QMessageBox::information(this, "password", "Zostales pomyslnie zalogowany");
 

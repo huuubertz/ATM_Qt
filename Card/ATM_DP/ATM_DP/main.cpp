@@ -79,6 +79,10 @@ int main() {
 	// Dodajemy stworzon¹ wyzej karte do bazy danych
 	server->add_new_account_to_database(_card[0]);
 
+	// Odczytaj instancje czy obiekt? z serwera.
+	server->get_card_instance(2);
+
+
 
 
 

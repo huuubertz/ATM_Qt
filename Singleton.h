@@ -31,13 +31,13 @@ public:
 	}
 
     // zmienna dajaca dostep do glownego menu ATM
-    static bool _ATM_menu_visibility;
+    static bool ATM_menu_visibility;
 };
 
 
-Server* Server::_instance;
+//Server* Server::_instance;
 
 // zainicjalizowanie poczatkowa wartoscia FALSE zmiennej odpowiadajacej za dostp do menu
-bool Server::_ATM_menu_visibility=false;
+bool Server::ATM_menu_visibility=false;
 
 #endif
