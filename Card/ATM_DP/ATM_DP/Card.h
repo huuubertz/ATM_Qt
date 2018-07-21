@@ -31,6 +31,7 @@ public:
 	Card_individual() 
 	{
 		_m_id = _m_id_generator;
+		_m_password = 1234;
 	}
 	// SETERS and GETTERS
 	

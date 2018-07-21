@@ -30,6 +30,10 @@ public:
 		_m_id_data_base.push_back(_card);
 	}
 
+    int get_password_of_card_from_data_base(Card* _card) {
+        return _card->get_password();
+    }
+
     // zmienna dajaca dostep do glownego menu ATM
     static bool ATM_menu_visibility;
 };

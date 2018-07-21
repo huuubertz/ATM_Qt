@@ -24,12 +24,13 @@ MainWindow::MainWindow(QWidget *parent) :
     // -------------------------------------------- LogIn window ---------------------------------------------------------
     // ustawiamy maxymalna liczbe znakow, PIN = 4 znaki
     ui->line_password->setMaxLength(4);
+    // ukrywamy widocznosc wpisywanych znakow
     ui->line_password->setEchoMode(QLineEdit::Password);
 
     // -------------------------------------------- Signals -------------------------------------------------------
 
     // -------------------------------------------- Server --------------------------------------------------------
-
+    /*
     Server* _server = Server::instance();
 
     Card* _karta = NULL;
@@ -43,7 +44,8 @@ MainWindow::MainWindow(QWidget *parent) :
     QString qhaslo = QString::fromStdString(haslo);
 
     _server->add_new_account_to_database(_karta);
-
+    _server->get_password_of_card_from_data_base(_karta);
+    */
 }
 
 MainWindow::~MainWindow()
@@ -105,6 +107,7 @@ void MainWindow::on_pushButton_3_clicked(bool checked)
 
 void MainWindow::on_pushButton_ok_logIn_clicked(bool checked)
 {
+    Server* server = Server::instance();
     // SPR. czy klasy odpowiadajace za tworzenie kard, serwer i dekoartor dzialaja
     Card* _karta = NULL;
     Factory* _factory = NULL;
@@ -116,6 +119,18 @@ void MainWindow::on_pushButton_ok_logIn_clicked(bool checked)
     std::string haslo = std::to_string(_karta->get_password());
     QString qhaslo = QString::fromStdString(haslo);
 
+    // Karta 2
+    Card* _karta_2 = NULL;
+
+    _karta_2 = _factory->create_individual_card();
+    _karta_2->set_password(2345);
+
+    //server->add_new_account_to_database(_karta_2);
+
+    QString qhaslo_2 = QString::number(server->get_password_of_card_from_data_base(_karta_2));
+
+
+    /*
     Card* _card[2];
     std::string _pin[2];
     QString _QPin[2];
@@ -124,11 +139,10 @@ void MainWindow::on_pushButton_ok_logIn_clicked(bool checked)
         _card[i] = _factory->create_individual_card();
 
         // odczytaj i zrzutuj haslo na QString
-        _card[i]->set_password(1234);
-        std::string _pin[i] = std::to_string(_card[i]->get_password());
-        QString _QPin[i] = QString::fromStdString(_pin[i]);
+        std::string pin[i] = std::to_string(_card[i]->get_password());
+        QString qPin[i] = QString::fromStdString(pin[i]);
     }
-
+    */
 
 
 
@@ -170,7 +184,7 @@ void MainWindow::on_pushButton_ok_logIn_clicked(bool checked)
         }
         */
 
-        if(password == _QPin[1])
+        if(password == "2345")
         {
             QMessageBox::information(this, "password", "Zostales pomyslnie zalogowany");
 
@@ -187,7 +201,7 @@ void MainWindow::on_pushButton_ok_logIn_clicked(bool checked)
 
     if(ui->checkBox_card_3->isChecked() == true)
     {
-        if(password == "3456")
+        if(password == qhaslo_2)
         {
              QMessageBox::information(this, "password", "Zostales pomyslnie zalogowany");
 

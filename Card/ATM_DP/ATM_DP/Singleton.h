@@ -30,10 +30,10 @@ public:
 		_m_id_data_base.push_back(_card);
 	}
 
-	Card* get_card_instance(int _number_of_card) {
-		return _m_id_data_base[_number_of_card];
-			// Nie moge tak zrobic bo nie ma konstruktora ktory pozwolilby mi na zrzutowanie vectora typu card na card individual. 
-			// Chyba ze w przyplywnie naglej kreatywnosci zmienie ten typ na Card_individual i bedzie banglalo? 
+	int get_password_of_card(Card* _card) {
+
+		return _card->get_password();
+
 	}
 
 	// TODO:

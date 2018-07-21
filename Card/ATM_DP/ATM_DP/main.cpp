@@ -80,7 +80,10 @@ int main() {
 	server->add_new_account_to_database(_card[0]);
 
 	// Odczytaj instancje czy obiekt? z serwera.
-	server->get_card_instance(2);
+	//server->get_card_instance(2);
+
+	cout << server->get_password_of_card(_karta) << endl;
+	cout << server->get_password_of_card(_card[1]) << endl;
 
 
 
