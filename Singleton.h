@@ -10,7 +10,7 @@ private:
 	static Server* _instance;
 
 	// tworzymy wektor, ktory bedzie symulowal baze danych na id i haslo
-	std::vector<Card*> _m_id_data_base;
+    std::vector<Card*> _m_id_data_base;
 
 	Server()
 	{
