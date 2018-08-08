@@ -33,6 +33,14 @@ public:
 		return _m_card->get_ID();
 	}
 
+    void set_saldo(float valude) {
+        _m_card->set_saldo(valude);
+    }
+
+    float get_saldo() {
+        return _m_card->get_saldo();
+    }
+
 	virtual Card* create_individual_account_with_wrapp() = 0;
 };
 

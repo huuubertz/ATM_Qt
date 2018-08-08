@@ -10,7 +10,7 @@ protected:
 	// przerobic haslo na tablice char 
 	// latwiej bedzie sprawdzic poprawnosc pin'u
 	int _m_password;
-    int _m_account_balance;
+    int _m_saldo;
 public:
 	Card()
 	{
@@ -22,6 +22,8 @@ public:
 	virtual int get_ID() = 0;
 	virtual void about_account() = 0;
 	virtual void about_transaction() = 0;
+    virtual void set_saldo(float valude) = 0;
+    virtual float get_saldo() = 0;
 
 };
 
@@ -55,6 +57,14 @@ public:
 	void about_transaction() {
 		std::cout << "about transaction" << std::endl;
 	}
+
+    void set_saldo(float value) {
+        _m_saldo = value;
+    }
+
+    float get_saldo() {
+        return _m_saldo;
+    }
 
 };
 

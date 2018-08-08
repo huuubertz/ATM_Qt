@@ -17,6 +17,27 @@ Server* Server::_instance = 0;
 
 // std::vector<Card*> Server::_m_id_data_base;
 
+//Server* server = Server::instance();
+// SPR. czy klasy odpowiadajace za tworzenie kard, serwer i dekoartor dzialaja
+//Card* _karta = NULL;
+//Factory* _factory = NULL;
+//
+//_karta = _factory->create_individual_card();
+//
+//_karta->set_password(1254);
+//
+//std::string haslo = std::to_string(_karta->get_password());
+//QString qhaslo = QString::fromStdString(haslo);
+//
+//server->add_new_account_to_database(_karta);
+
+Factory* fabryka = NULL;
+
+Card* karciocha = fabryka->create_individual_card();
+
+
+
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -57,55 +78,6 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-// ---------------------- KLAWAITURA ----------------------------------------------
-/*
-void MainWindow::on_pushButton_3_clicked(bool checked)
-{
-    // create window for keyboard
-    QWidget* window_keyboard = new QWidget;
-    window_keyboard->setFixedSize(220, 140);
-
-    // create button for keyboard
-    QPushButton *_button_card_1 = new QPushButton("7",window_keyboard);
-    _button_card_1->setGeometry(10,10,60,30);
-
-    QPushButton *_button_card_2 = new QPushButton("4",window_keyboard);
-    _button_card_2->setGeometry(10,40,60,30);
-
-    QPushButton *_button_card_3 = new QPushButton("1",window_keyboard);
-    _button_card_3->setGeometry(10,70,60,30);
-
-    QPushButton *_button_card_4 = new QPushButton("OK",window_keyboard);
-    _button_card_4->setGeometry(10,100,60,30);
-
-    QPushButton *_button_card_5 = new QPushButton("8",window_keyboard);
-    _button_card_5->setGeometry(80,10,60,30);
-
-    QPushButton *_button_card_6 = new QPushButton("5",window_keyboard);
-    _button_card_6->setGeometry(80,40,60,30);
-
-    QPushButton *_button_card_7 = new QPushButton("2",window_keyboard);
-    _button_card_7->setGeometry(80,70,60,30);
-
-    QPushButton *_button_card_8 = new QPushButton("0",window_keyboard);
-    _button_card_8->setGeometry(80,100,60,30);
-
-    QPushButton *_button_card_9 = new QPushButton("9",window_keyboard);
-    _button_card_9->setGeometry(150,10,60,30);
-
-    QPushButton *_button_card_10 = new QPushButton("6",window_keyboard);
-    _button_card_10->setGeometry(150,40,60,30);
-
-    QPushButton *_button_card_11 = new QPushButton("3",window_keyboard);
-    _button_card_11->setGeometry(150,70,60,30);
-
-    QPushButton *_button_card_12 = new QPushButton("CANCLE",window_keyboard);
-    _button_card_12->setGeometry(150,100,60,30);
-
-    window_keyboard->show();
-
-}
-*/
 
 // ------------------------------------ LOGIN WINDOW -----------------------------------------------------
 
@@ -137,31 +109,17 @@ void MainWindow::on_pushButton_ok_logIn_clicked(bool checked)
 
     server->add_new_account_to_database(_karta_2);
 
+    // karta 3 global
+    karciocha->set_password(5678);
 
-    /*
-    Card* _card[2];
-    std::string _pin[2];
-    QString _QPin[2];
+    QString qhaslo_3 = QString::number(server->get_password_of_card_from_data_base(karciocha));
 
-    for (int i = 0 ;i < 2 ; i++) {
-        _card[i] = _factory->create_individual_card();
-
-        // odczytaj i zrzutuj haslo na QString
-        std::string pin[i] = std::to_string(_card[i]->get_password());
-        QString qPin[i] = QString::fromStdString(pin[i]);
-    }
-    */
-
-
-
-
-    // to do unVISIBLE password entered
+    server->add_new_account_to_database(karciocha);
 
     // pobierz dane z textboxa po wcisnieciu ok
     QString password = ui->line_password->text();
 
     // if checkbox 1 jest zaznaczony to ...
-
     if(ui->checkBox_card_1->isChecked() == true)
     {
         if(password == qhaslo)
@@ -192,7 +150,7 @@ void MainWindow::on_pushButton_ok_logIn_clicked(bool checked)
         }
         */
 
-        if(password == "2345")
+        if(password == qhaslo_3)
         {
             QMessageBox::information(this, "password", "Zostales pomyslnie zalogowany");
 
@@ -303,29 +261,30 @@ void MainWindow::main_menu()
     MainWindow::_button_card[11]->setGeometry(60,190,280,30);
 
     // create labels for main interface of atm
-    QLabel* label_1 = new QLabel("", window_atm);
-    label_1->setGeometry(70, 10, 50, 30);
+    MainWindow::_label[0] = new QLabel("", window_atm);
+    MainWindow::_label[0]->setGeometry(70, 10, 50, 30);
 
-    QLabel* label_2 = new QLabel("", window_atm);
-    label_2->setGeometry(70, 40, 50, 30);
+    MainWindow::_label[1] = new QLabel("", window_atm);
+    MainWindow::_label[1]->setGeometry(70, 40, 50, 30);
 
-    QLabel* label_3 = new QLabel("", window_atm);
-    label_3->setGeometry(70, 70, 50, 30);
+    MainWindow::_label[2] = new QLabel("", window_atm);
+    MainWindow::_label[2]->setGeometry(70, 70, 50, 30);
 
-    QLabel* label_4 = new QLabel("inne uslugi", window_atm);
-    label_4->setGeometry(70, 100, 70, 30);
+    MainWindow::_label[3] = new QLabel("inne uslugi", window_atm);
+    MainWindow::_label[3]->setGeometry(70, 100, 50, 30);
 
-    QLabel* label_5 = new QLabel("wyplata 50 PLN \n bez wydruku", window_atm);
-    label_5->setGeometry(250, 10, 100, 30);
+    MainWindow::_label[4] = new QLabel("wyplata 50 PLN \n bez wydruku", window_atm);
+    MainWindow::_label[4]->setGeometry(250, 10, 100, 30);
 
-    QLabel* label_6 = new QLabel("Wyplata gotowki \n w PLN", window_atm);
-    label_6->setGeometry(270, 40, 50, 30);
+    MainWindow::_label[5] = new QLabel("Wyplata gotowki \n w PLN", window_atm);
+    MainWindow::_label[5]->setGeometry(270, 40, 50, 30);
 
-    QLabel* label_7 = new QLabel("Zapytanie \n o saldo", window_atm);
-    label_7->setGeometry(270, 70, 70, 30);
+    MainWindow::_label[6] = new QLabel("Zapytanie \n o saldo", window_atm);
+    MainWindow::_label[6]->setGeometry(270, 70, 70, 30);
 
-    QLabel* label_8 = new QLabel("Wyplata \n gotowki", window_atm);
-    label_8->setGeometry(270, 100, 70, 30);
+
+    MainWindow::_label[7] = new QLabel("Wyplata \n gotowki", window_atm);
+    MainWindow::_label[7]->setGeometry(270, 100, 70, 30);
 
     // create text browers to display information about
     // login, wrong pin, or your decision
@@ -335,13 +294,24 @@ void MainWindow::main_menu()
     //text_browser_1->setText("Welcone in ATM :-) \n Put Card to start sesion. \n");
 
     connect(_button_card[4], SIGNAL (clicked()), this, SLOT (wyplata_pieniedzy()));
+    connect(_button_card[6], SIGNAL (clicked()), this, SLOT (saldo()));
 
 
 
     window_atm->show();
 }
 
-void MainWindow::wyplata_pieniedzy() {
+void MainWindow::wyplata_pieniedzy(int quantity, bool receipt) {
+
+
+}
+
+void MainWindow::saldo() {
+    // zmienic na double bo ucina po przecinku
+    karciocha->set_saldo(234.56);
+    std::string gownochuj = std::to_string(karciocha->get_saldo());
+    QString qgownochuj = QString::fromStdString(gownochuj);
+    QMessageBox::information(this, "Saldo", qgownochuj);
 
 
 }
