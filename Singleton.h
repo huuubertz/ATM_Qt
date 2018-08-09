@@ -30,8 +30,16 @@ public:
 		_m_id_data_base.push_back(_card);
 	}
 
-    int get_password_of_card_from_data_base(Card* _card) {
+    int get_password_of_card(Card* _card) {
         return _card->get_password();
+    }
+
+    void change_password_of_card(Card* card, int password) {
+        card->set_password(password);
+    }
+
+    void change_saldo_on_account(Card* card, double value) {
+        card->set_saldo(value);
     }
 
     // zmienna dajaca dostep do glownego menu ATM

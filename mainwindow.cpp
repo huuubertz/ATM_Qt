@@ -8,35 +8,20 @@
 #include <QMessageBox>
 #include <string>
 
-    // My libs
+// My libs
 #include "Singleton.h"
 #include "Card.h"
 #include "Decorator.h"
 
 Server* Server::_instance = 0;
 
-// std::vector<Card*> Server::_m_id_data_base;
-
-//Server* server = Server::instance();
-// SPR. czy klasy odpowiadajace za tworzenie kard, serwer i dekoartor dzialaja
-//Card* _karta = NULL;
-//Factory* _factory = NULL;
-//
-//_karta = _factory->create_individual_card();
-//
-//_karta->set_password(1254);
-//
-//std::string haslo = std::to_string(_karta->get_password());
-//QString qhaslo = QString::fromStdString(haslo);
-//
-//server->add_new_account_to_database(_karta);
-
+// Create global instance of Card
 Factory* fabryka = NULL;
 
 Card* karciocha = fabryka->create_individual_card();
-
-
-
+Card* card_1 = fabryka->create_individual_card();
+Card* card_2 = fabryka->create_individual_card();
+Card* card_3 = fabryka->create_individual_card();
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -52,25 +37,17 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // -------------------------------------------- Signals -------------------------------------------------------
 
-    //connect(_button_card[4], SIGNAL (QPushButton::clicked()), this, SLOT (wyplata_pieniedzy()));
+    // -------------------------------------------- Server -------------------------------------------------------
 
-    // -------------------------------------------- Server --------------------------------------------------------
-    /*
-    Server* _server = Server::instance();
+    // Add instance of Card to server
+    Server* server = Server::instance();
 
-    Card* _karta = NULL;
-    Factory* _factory = NULL;
+    server->add_new_account_to_database(card_1);
+    server->add_new_account_to_database(card_2);
+    server->add_new_account_to_database(card_3);
 
-    _karta = _factory->create_individual_card();
+    server->change_password_of_card(card_1, 1234);
 
-    _karta->set_password(1254);
-
-    std::string haslo = std::to_string(_karta->get_password());
-    QString qhaslo = QString::fromStdString(haslo);
-
-    _server->add_new_account_to_database(_karta);
-    _server->get_password_of_card_from_data_base(_karta);
-    */
 }
 
 MainWindow::~MainWindow()
@@ -105,14 +82,14 @@ void MainWindow::on_pushButton_ok_logIn_clicked(bool checked)
 
     //server->add_new_account_to_database(_karta_2);
 
-    QString qhaslo_2 = QString::number(server->get_password_of_card_from_data_base(_karta_2));
+    QString qhaslo_2 = QString::number(server->get_password_of_card(_karta_2));
 
     server->add_new_account_to_database(_karta_2);
 
     // karta 3 global
     karciocha->set_password(5678);
 
-    QString qhaslo_3 = QString::number(server->get_password_of_card_from_data_base(karciocha));
+    QString qhaslo_3 = QString::number(server->get_password_of_card(karciocha));
 
     server->add_new_account_to_database(karciocha);
 
