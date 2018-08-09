@@ -22,6 +22,8 @@ Card* card_1 = fabryka->create_individual_card();
 Card* card_2 = fabryka->create_individual_card();
 Card* card_3 = fabryka->create_individual_card();
 
+Card* card =NULL;
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -49,6 +51,9 @@ MainWindow::MainWindow(QWidget *parent) :
     server->change_password_of_card(card_2, 2345);
     server->change_password_of_card(card_3, 3456);
 
+    server->change_saldo_on_account(card_1, 51);
+    server->change_saldo_on_account(card_2, 512.46);
+    server->change_saldo_on_account(card_3, 51246.24);
 }
 
 MainWindow::~MainWindow()
@@ -64,11 +69,11 @@ void MainWindow::on_pushButton_ok_logIn_clicked(bool checked)
     // TESTING without reader and card
     Server* server = Server::instance();
     // karta 1 global
-    QString qhaslo_1 = QString::number(server->get_password_of_card(card_1));
+    QString qhaslo_1 = QString::number(server->get_password_of_card(card));
     // karta 2 global
-    QString qhaslo_2 = QString::number(server->get_password_of_card(card_2));
+    QString qhaslo_2 = QString::number(server->get_password_of_card(card));
     // karta 3 global
-    QString qhaslo_3 = QString::number(server->get_password_of_card(card_3));
+    QString qhaslo_3 = QString::number(server->get_password_of_card(card));
 
     // pobierz dane z textboxa po wcisnieciu ok
     QString password = ui->line_password->text();
@@ -125,6 +130,8 @@ void MainWindow::on_checkBox_card_1_stateChanged(int arg1)
     if(ui->checkBox_card_1->isChecked() == true){
         ui->checkBox_card_2->setChecked(false);
         ui->checkBox_card_3->setChecked(false);
+
+        card = card_1;
     }
 }
 
@@ -133,6 +140,8 @@ void MainWindow::on_checkBox_card_2_stateChanged(int arg1)
     if(ui->checkBox_card_2->isChecked() == true){
         ui->checkBox_card_1->setChecked(false);
         ui->checkBox_card_3->setChecked(false);
+
+        card = card_2;
     }
 }
 
@@ -141,6 +150,8 @@ void MainWindow::on_checkBox_card_3_stateChanged(int arg1)
     if(ui->checkBox_card_3->isChecked() == true){
         ui->checkBox_card_1->setChecked(false);
         ui->checkBox_card_2->setChecked(false);
+
+        card = card_3;
     }
 }
 
@@ -242,11 +253,9 @@ void MainWindow::wyplata_pieniedzy(int quantity, bool receipt) {
 
 void MainWindow::saldo() {
 
-    // zmienic na double bo ucina po przecinku
-    //karciocha->set_saldo(234.56);
-    //std::string gownochuj = std::to_string(karciocha->get_saldo());
-    //QString qgownochuj = QString::fromStdString(gownochuj);
-    //QMessageBox::information(this, "Saldo", qgownochuj);
+    std::string balance = std::to_string(card->get_saldo());
+    QString qbalance = QString::fromStdString(balance);
+    QMessageBox::information(this, "Saldo", qbalance);
 }
 
 void MainWindow::logout()

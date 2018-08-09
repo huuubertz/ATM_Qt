@@ -22,8 +22,8 @@ public:
 	virtual int get_ID() = 0;
 	virtual void about_account() = 0;
 	virtual void about_transaction() = 0;
-    virtual void set_saldo(float valude) = 0;
-    virtual float get_saldo() = 0;
+    virtual void set_saldo(double valude) = 0;
+    virtual double get_saldo() = 0;
 
 };
 
@@ -58,11 +58,11 @@ public:
 		std::cout << "about transaction" << std::endl;
 	}
 
-    void set_saldo(float value) {
+    void set_saldo(double value) {
         _m_saldo = value;
     }
 
-    float get_saldo() {
+    double get_saldo() {
         return _m_saldo;
     }
 
