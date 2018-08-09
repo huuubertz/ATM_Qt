@@ -223,6 +223,14 @@ void MainWindow::main_menu()
 
     connect(_button_card[4], SIGNAL (clicked()), this, SLOT (wyplata_pieniedzy()));
     connect(_button_card[6], SIGNAL (clicked()), this, SLOT (saldo()));
+    connect(_button_card[8], SIGNAL (clicked()), this, SLOT (logout()));
+
+    QObject* button = QObject::sender();
+    if(button == _button_card[3]){
+        window_atm->close();
+        QMessageBox::information(this, "Logout", "chuj");
+
+    }
 
     window_atm->show();
 }
@@ -233,12 +241,17 @@ void MainWindow::wyplata_pieniedzy(int quantity, bool receipt) {
 }
 
 void MainWindow::saldo() {
+
     // zmienic na double bo ucina po przecinku
     //karciocha->set_saldo(234.56);
     //std::string gownochuj = std::to_string(karciocha->get_saldo());
     //QString qgownochuj = QString::fromStdString(gownochuj);
     //QMessageBox::information(this, "Saldo", qgownochuj);
+}
 
-
+void MainWindow::logout()
+{
+    QMessageBox::information(this, "Logout", "See you");
+    QCoreApplication::quit();
 }
 

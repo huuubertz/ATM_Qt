@@ -33,6 +33,8 @@ private slots:
 
     void main_menu();
 
+    void logout();
+
 private:
     Ui::MainWindow *ui;
     QPushButton* button = NULL;
