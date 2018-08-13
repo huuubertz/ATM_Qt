@@ -140,6 +140,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(_button_card[5], SIGNAL (clicked()), this, SLOT (wyplata_pieniedzy()));
     connect(_button_card[6], SIGNAL (clicked()), this, SLOT (saldo()));
     connect(_button_card[8], SIGNAL (clicked()), this, SLOT (logout()));
+    connect(_button_card[10], SIGNAL (clicked()), this, SLOT (collect_money()));
 }
 
 MainWindow::~MainWindow()
@@ -348,6 +349,23 @@ int MainWindow::cash_withdrawal(int quantity,  bool receipt)
         card->set_saldo(card->get_saldo() - quantity);
         QString qbalance = QString::number(card->get_saldo());
         QMessageBox::information(this, "Ok", qbalance);
+
+        _set_disabled_to_all_card_buttons(8);
+        _button_card[10]->setEnabled(true);
         return card->get_saldo();
     }
+}
+
+void MainWindow::_set_disabled_to_all_card_buttons(int numbers)
+{
+    for (int i = 0; i < numbers; i++)
+    {
+        _button_card[i]->setEnabled(false);
+    }
+
+}
+
+void MainWindow::collect_money()
+{
+    _button_card[10]->setEnabled(false);
 }

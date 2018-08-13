@@ -44,6 +44,8 @@ private slots:
 
     void wyplata500();
 
+    void collect_money();
+
     void saldo();
 
     void main_menu();
@@ -60,6 +62,7 @@ private:
     QPushButton* butonierka = NULL;
 
     int cash_withdrawal(int quantity=0, bool receipt=false);
+    void _set_disabled_to_all_card_buttons(int numbers);
 };
 
 #endif // MAINWINDOW_H
