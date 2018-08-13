@@ -268,9 +268,13 @@ void MainWindow::wyplata_pieniedzy(int quantity, bool receipt) {
    _label[7]->setText("inna kwota");
    _button_card[7]->setEnabled(true);
 
+   connect(_button_card[0], SIGNAL (clicked()), this, SLOT (wyplata20()));
+   connect(_button_card[1], SIGNAL (clicked()), this, SLOT (wyplata50()));
+   connect(_button_card[4], SIGNAL (clicked()), this, SLOT (wyplata100()));
+   disconnect(_button_card[5], SIGNAL (clicked()), this, SLOT (wyplata_pieniedzy()));
+   connect(_button_card[5], SIGNAL (clicked()), this, SLOT (wyplata200()));
    disconnect(_button_card[6], SIGNAL (clicked()), this, SLOT (saldo()));
    connect(_button_card[6], SIGNAL (clicked()), this, SLOT (wyplata500()));
-   connect(_button_card[4], SIGNAL (clicked()), this, SLOT (wyplata100()));
 
    QObject* button = QObject::sender();
    if (button == MainWindow::_button_card[7])
