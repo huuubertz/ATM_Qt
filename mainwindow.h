@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QPushButton>
 #include <QLabel>
+#include <QWidget>
 
 namespace Ui {
 class MainWindow;
@@ -17,6 +18,10 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+public slots:
+    void buttonAclicked();
+    void buttonBclicked();
+
 private slots:
 
     void on_pushButton_ok_logIn_clicked(bool checked);
@@ -29,6 +34,16 @@ private slots:
 
     void wyplata_pieniedzy(int quantity=0, bool receipt=false);
 
+    void wyplata20();
+
+    void wyplata50();
+
+    void wyplata100();
+
+    void wyplata200();
+
+    void wyplata500();
+
     void saldo();
 
     void main_menu();
@@ -37,10 +52,14 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    QWidget* window_atm;
     QPushButton* button = NULL;
     QPushButton *_button_card[12];
     QLabel *_label[8];
+    int buttoA, buttonB;
+    QPushButton* butonierka = NULL;
 
+    int cash_withdrawal(int quantity=0, bool receipt=false);
 };
 
 #endif // MAINWINDOW_H

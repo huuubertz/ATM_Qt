@@ -30,13 +30,18 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    // TOSTY
+    // Przrelozyc cala inicjalizacje drugiego okna do konstruktora a w oknie main wywolac tylko window_atm->show()
+    buttoA = 0;
+    buttonB = 0;
+
+    butonierka = new QPushButton(window_atm);
+
     // -------------------------------------------- LogIn window ---------------------------------------------------------
     // ustawiamy maxymalna liczbe znakow, PIN = 4 znaki
     ui->line_password->setMaxLength(4);
     // ukrywamy widocznosc wpisywanych znakow
     ui->line_password->setEchoMode(QLineEdit::Password);
-
-    // -------------------------------------------- Signals -------------------------------------------------------
 
     // -------------------------------------------- Server -------------------------------------------------------
 
@@ -54,6 +59,87 @@ MainWindow::MainWindow(QWidget *parent) :
     server->change_saldo_on_account(card_1, 51);
     server->change_saldo_on_account(card_2, 512.46);
     server->change_saldo_on_account(card_3, 51246.24);
+
+    // -------------------------------------------- INIT OF MAIN WINDOW -------------------------------------------------------
+
+    window_atm = new QWidget;
+    window_atm->setFixedSize(400, 230);
+
+    _button_card[0] = new QPushButton("",window_atm);
+    _button_card[0]->setGeometry(10,10,50,30);
+    _button_card[0]->setEnabled(false);
+
+    _button_card[1] = new QPushButton("",window_atm);
+    _button_card[1]->setGeometry(10,40,50,30);
+    _button_card[1]->setEnabled(false);
+
+    _button_card[2] = new QPushButton("",window_atm);
+    _button_card[2]->setGeometry(10,70,50,30);
+    _button_card[2]->setEnabled(false);
+
+    _button_card[3] = new QPushButton("",window_atm);
+    _button_card[3]->setGeometry(10,100,50,30);
+
+    _button_card[4] = new QPushButton("",window_atm);
+    _button_card[4]->setGeometry(340,10,50,30);
+
+    _button_card[5] = new QPushButton("",window_atm);
+    _button_card[5]->setGeometry(340,40,50,30);
+
+    _button_card[6] = new QPushButton("",window_atm);
+    _button_card[6]->setGeometry(340,70,50,30);
+
+    _button_card[7] = new QPushButton("",window_atm);
+    _button_card[7]->setGeometry(340,100,50,30);
+
+    _button_card[8] = new QPushButton("Logout",window_atm);
+    _button_card[8]->setGeometry(290,130,100,30);
+
+    // create push batton get receipt from atm
+    _button_card[9] = new QPushButton("Get receipt",window_atm);
+    _button_card[9]->setGeometry(10,130,100,30);
+    _button_card[9]->setEnabled(false);
+
+    // create push button to colect money from atm
+    _button_card[10] = new QPushButton("Collect money",window_atm);
+    _button_card[10]->setGeometry(60,160,280,30);
+    _button_card[10]->setEnabled(false);
+
+    // create push button to put money to atm
+    _button_card[11] = new QPushButton("Put money",window_atm);
+    _button_card[11]->setGeometry(60,190,280,30);
+    _button_card[11]->setEnabled(false);
+
+    // create labels for main interface of atm
+    _label[0] = new QLabel("", window_atm);
+    _label[0]->setGeometry(70, 10, 50, 30);
+
+    _label[1] = new QLabel("", window_atm);
+    _label[1]->setGeometry(70, 40, 50, 30);
+
+    _label[2] = new QLabel("", window_atm);
+    _label[2]->setGeometry(70, 70, 50, 30);
+
+    _label[3] = new QLabel("Other", window_atm);
+    _label[3]->setGeometry(70, 100, 50, 30);
+
+    _label[4] = new QLabel("Payment of \n 50 zl", window_atm);
+    _label[4]->setGeometry(270, 10, 70, 30);
+
+    _label[5] = new QLabel("Cash \n withdrawal", window_atm);
+    _label[5]->setGeometry(270, 40, 70, 30);
+
+    _label[6] = new QLabel("Account \n balance", window_atm);
+    _label[6]->setGeometry(270, 70, 70, 30);
+
+    _label[7] = new QLabel("Cash \n payment", window_atm);
+    _label[7]->setGeometry(270, 100, 70, 30);
+
+    // -------------------------------------------- Signals -------------------------------------------------------
+
+    connect(_button_card[5], SIGNAL (clicked()), this, SLOT (wyplata_pieniedzy()));
+    connect(_button_card[6], SIGNAL (clicked()), this, SLOT (saldo()));
+    connect(_button_card[8], SIGNAL (clicked()), this, SLOT (logout()));
 }
 
 MainWindow::~MainWindow()
@@ -159,96 +245,38 @@ void MainWindow::on_checkBox_card_3_stateChanged(int arg1)
 
 void MainWindow::main_menu()
 {
-    QWidget* window_atm = new QWidget;
-    window_atm->setFixedSize(400, 230);
-
-    MainWindow::_button_card[0] = new QPushButton("",window_atm);
-    MainWindow::_button_card[0]->setGeometry(10,10,50,30);
-    MainWindow::_button_card[0]->setEnabled(false);
-
-    MainWindow::_button_card[1] = new QPushButton("",window_atm);
-    MainWindow::_button_card[1]->setGeometry(10,40,50,30);
-    MainWindow::_button_card[1]->setEnabled(false);
-
-    MainWindow::_button_card[2] = new QPushButton("",window_atm);
-    MainWindow::_button_card[2]->setGeometry(10,70,50,30);
-    MainWindow::_button_card[2]->setEnabled(false);
-
-    MainWindow::_button_card[3] = new QPushButton("",window_atm);
-    MainWindow::_button_card[3]->setGeometry(10,100,50,30);
-
-    MainWindow::_button_card[4] = new QPushButton("",window_atm);
-    MainWindow::_button_card[4]->setGeometry(340,10,50,30);
-
-    MainWindow::_button_card[5] = new QPushButton("",window_atm);
-    MainWindow::_button_card[5]->setGeometry(340,40,50,30);
-
-    MainWindow::_button_card[6] = new QPushButton("",window_atm);
-    MainWindow::_button_card[6]->setGeometry(340,70,50,30);
-
-    MainWindow::_button_card[7] = new QPushButton("",window_atm);
-    MainWindow::_button_card[7]->setGeometry(340,100,50,30);
-
-    MainWindow::_button_card[8] = new QPushButton("Logout",window_atm);
-    MainWindow::_button_card[8]->setGeometry(290,130,100,30);
-
-    // create push batton get receipt from atm
-    MainWindow::_button_card[9] = new QPushButton("Get receipt",window_atm);
-    MainWindow::_button_card[9]->setGeometry(10,130,100,30);
-    MainWindow::_button_card[9]->setEnabled(false);
-
-    // create push button to colect money from atm
-    MainWindow::_button_card[10] = new QPushButton("Collect money",window_atm);
-    MainWindow::_button_card[10]->setGeometry(60,160,280,30);
-    MainWindow::_button_card[10]->setEnabled(false);
-
-    // create push button to put money to atm
-    MainWindow::_button_card[11] = new QPushButton("Put money",window_atm);
-    MainWindow::_button_card[11]->setGeometry(60,190,280,30);
-    MainWindow::_button_card[11]->setEnabled(false);
-
-    // create labels for main interface of atm
-    MainWindow::_label[0] = new QLabel("", window_atm);
-    MainWindow::_label[0]->setGeometry(70, 10, 50, 30);
-
-    MainWindow::_label[1] = new QLabel("", window_atm);
-    MainWindow::_label[1]->setGeometry(70, 40, 50, 30);
-
-    MainWindow::_label[2] = new QLabel("", window_atm);
-    MainWindow::_label[2]->setGeometry(70, 70, 50, 30);
-
-    MainWindow::_label[3] = new QLabel("Other", window_atm);
-    MainWindow::_label[3]->setGeometry(70, 100, 50, 30);
-
-    MainWindow::_label[4] = new QLabel("Payment of \n 50 zl", window_atm);
-    MainWindow::_label[4]->setGeometry(270, 10, 100, 30);
-
-    MainWindow::_label[5] = new QLabel("Cash \n payment", window_atm);
-    MainWindow::_label[5]->setGeometry(270, 40, 50, 30);
-
-    MainWindow::_label[6] = new QLabel("Account \n balance", window_atm);
-    MainWindow::_label[6]->setGeometry(270, 70, 70, 30);
-
-    MainWindow::_label[7] = new QLabel("Cash \n withdrawal", window_atm);
-    MainWindow::_label[7]->setGeometry(270, 100, 70, 30);
-
-    connect(_button_card[4], SIGNAL (clicked()), this, SLOT (wyplata_pieniedzy()));
-    connect(_button_card[6], SIGNAL (clicked()), this, SLOT (saldo()));
-    connect(_button_card[8], SIGNAL (clicked()), this, SLOT (logout()));
-
-    QObject* button = QObject::sender();
-    if(button == _button_card[3]){
-        window_atm->close();
-        QMessageBox::information(this, "Logout", "chuj");
-
-    }
-
     window_atm->show();
 }
 
 void MainWindow::wyplata_pieniedzy(int quantity, bool receipt) {
 
+   // Funkcja, ktora przyjmuje tablice i w petli uzupelnia text do labela i enabled z kolejnej tablicy.
+   _label[0]->setText("20");
+   _button_card[0]->setEnabled(true);
+   _label[1]->setText("50");
+   _button_card[1]->setEnabled(true);
+   _label[2]->setText("");
+   _button_card[2]->setEnabled(false);
+   _label[3]->setText("");
+   _button_card[3]->setEnabled(false);
+   _label[4]->setText("100");
+   _button_card[4]->setEnabled(true);
+   _label[5]->setText("200");
+   _button_card[5]->setEnabled(true);
+   _label[6]->setText("500");
+   _button_card[6]->setEnabled(true);
+   _label[7]->setText("inna kwota");
+   _button_card[7]->setEnabled(true);
 
+   disconnect(_button_card[6], SIGNAL (clicked()), this, SLOT (saldo()));
+   connect(_button_card[6], SIGNAL (clicked()), this, SLOT (wyplata500()));
+   connect(_button_card[4], SIGNAL (clicked()), this, SLOT (wyplata100()));
+
+   QObject* button = QObject::sender();
+   if (button == MainWindow::_button_card[7])
+   {
+       QMessageBox::information(this, "Logout", "See you");
+   }
 }
 
 void MainWindow::saldo() {
@@ -264,3 +292,58 @@ void MainWindow::logout()
     QCoreApplication::quit();
 }
 
+void MainWindow::buttonAclicked()
+{
+    buttoA = 1;
+    if (buttoA == 1)
+    {
+        _button_card[7]->setEnabled(true);
+    }
+
+}
+
+void MainWindow::buttonBclicked()
+{
+
+}
+
+void MainWindow::wyplata20()
+{
+    cash_withdrawal(20);
+}
+
+void MainWindow::wyplata50()
+{
+    cash_withdrawal(50);
+}
+
+void MainWindow::wyplata100()
+{
+    cash_withdrawal(100);
+}
+
+void MainWindow::wyplata200()
+{
+    cash_withdrawal(200);
+}
+
+void MainWindow::wyplata500()
+{
+    cash_withdrawal(500);
+}
+
+int MainWindow::cash_withdrawal(int quantity,  bool receipt)
+{
+    if (quantity > card->get_saldo())
+    {
+        QMessageBox::information(this, "Fail", "You haven't as much money.");
+    }
+
+    else
+    {
+        card->set_saldo(card->get_saldo() - quantity);
+        QString qbalance = QString::number(card->get_saldo());
+        QMessageBox::information(this, "Ok", qbalance);
+        return card->get_saldo();
+    }
+}
