@@ -5,6 +5,7 @@
 #include <QPushButton>
 #include <QLabel>
 #include <QWidget>
+#include <QLineEdit>
 
 namespace Ui {
 class MainWindow;
@@ -50,6 +51,10 @@ private slots:
 
     void main_menu();
 
+    void other();
+
+    void cash_payment();
+
     void logout();
 
 private:
@@ -58,6 +63,11 @@ private:
     QPushButton* button = NULL;
     QPushButton *_button_card[12];
     QLabel *_label[8];
+
+    QWidget* window_of_payment = NULL;
+    QLineEdit* line = NULL;
+    QPushButton* ok_button = NULL;
+
 
     int cash_withdrawal(int quantity=0, bool receipt=false);
     void _set_disabled_to_all_card_buttons(int numbers=8);

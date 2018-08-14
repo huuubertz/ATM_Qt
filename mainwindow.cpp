@@ -8,6 +8,7 @@
 #include <QMessageBox>
 #include <string>
 #include <fstream>
+#include <iomanip> // setprecision
 
 // My libs
 #include "Singleton.h"
@@ -130,11 +131,24 @@ MainWindow::MainWindow(QWidget *parent) :
     _label[7] = new QLabel("Cash \n payment", window_atm);
     _label[7]->setGeometry(270, 100, 70, 30);
 
+    // -------------------------------------------- Cash payment window -------------------------------------------------------
+
+    window_of_payment = new QWidget();
+    window_of_payment->setFixedSize(200,100);
+
+    line = new QLineEdit(window_of_payment);
+    line->setMaxLength(4);
+    line->setGeometry(85, 30, 35, 20);
+
+    ok_button = new QPushButton("ok", window_of_payment);
+    ok_button->setGeometry(75, 70, 55, 20);
     // -------------------------------------------- Signals -------------------------------------------------------
 
+    connect(_button_card[3], SIGNAL (clicked()), this, SLOT (other()));
     connect(_button_card[4], SIGNAL (clicked()), this, SLOT (withdrawal50_without_receipt()));
     connect(_button_card[5], SIGNAL (clicked()), this, SLOT (cash_withdrawal_window()));
     connect(_button_card[6], SIGNAL (clicked()), this, SLOT (saldo()));
+    connect(_button_card[7], SIGNAL (clicked()), this, SLOT (cash_payment()));
     connect(_button_card[8], SIGNAL (clicked()), this, SLOT (logout()));
     connect(_button_card[9], SIGNAL (clicked()), this, SLOT (get_receipt()));
     connect(_button_card[10], SIGNAL (clicked()), this, SLOT (collect_money()));
@@ -286,7 +300,7 @@ void MainWindow::saldo() {
 
     std::string balance = std::to_string(card->get_saldo());
     QString qbalance = QString::fromStdString(balance);
-    QMessageBox::information(this, "Saldo", qbalance);
+    QMessageBox::information(this, "Saldo", qbalance, 'd', 2);
 }
 
 void MainWindow::logout()
@@ -393,4 +407,14 @@ void MainWindow::get_receipt()
     }
 
     else QMessageBox::information(this, "Wrong", "Unable to write to file");
+}
+
+void MainWindow::other()
+{
+
+}
+
+void MainWindow::cash_payment()
+{
+    window_of_payment->show();
 }
