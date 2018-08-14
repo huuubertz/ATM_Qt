@@ -32,17 +32,19 @@ private slots:
 
     void on_checkBox_card_1_stateChanged(int arg1);
 
-    void wyplata_pieniedzy(int quantity=0, bool receipt=false);
+    void cash_withdrawal_window();
 
-    void wyplata20();
+    void withdrawal20();
 
-    void wyplata50();
+    void withdrawal50();
 
-    void wyplata100();
+    void withdrawal100();
 
-    void wyplata200();
+    void withdrawal200();
 
-    void wyplata500();
+    void withdrawal500();
+
+    void withdrawal50_without_receipt();
 
     void collect_money();
 

@@ -137,7 +137,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // -------------------------------------------- Signals -------------------------------------------------------
 
-    connect(_button_card[5], SIGNAL (clicked()), this, SLOT (wyplata_pieniedzy()));
+    connect(_button_card[4], SIGNAL (clicked()), this, SLOT (withdrawal50_without_receipt()));
+    connect(_button_card[5], SIGNAL (clicked()), this, SLOT (cash_withdrawal_window()));
     connect(_button_card[6], SIGNAL (clicked()), this, SLOT (saldo()));
     connect(_button_card[8], SIGNAL (clicked()), this, SLOT (logout()));
     connect(_button_card[9], SIGNAL (clicked()), this, SLOT (get_receipt()));
@@ -250,7 +251,7 @@ void MainWindow::main_menu()
     window_atm->show();
 }
 
-void MainWindow::wyplata_pieniedzy(int quantity, bool receipt) {
+void MainWindow::cash_withdrawal_window() {
 
    // Funkcja, ktora przyjmuje tablice i w petli uzupelnia text do labela i enabled z kolejnej tablicy.
    _label[0]->setText("20");
@@ -270,13 +271,14 @@ void MainWindow::wyplata_pieniedzy(int quantity, bool receipt) {
    _label[7]->setText("inna kwota");
    _button_card[7]->setEnabled(true);
 
-   connect(_button_card[0], SIGNAL (clicked()), this, SLOT (wyplata20()));
-   connect(_button_card[1], SIGNAL (clicked()), this, SLOT (wyplata50()));
-   connect(_button_card[4], SIGNAL (clicked()), this, SLOT (wyplata100()));
+   connect(_button_card[0], SIGNAL (clicked()), this, SLOT (withdrawal20()));
+   connect(_button_card[1], SIGNAL (clicked()), this, SLOT (withdrawal50()));
+   disconnect(_button_card[4], SIGNAL (clicked()), this, SLOT (withdrawal50_without_receipt()));
+   connect(_button_card[4], SIGNAL (clicked()), this, SLOT (withdrawal100()));
    disconnect(_button_card[5], SIGNAL (clicked()), this, SLOT (wyplata_pieniedzy()));
-   connect(_button_card[5], SIGNAL (clicked()), this, SLOT (wyplata200()));
+   connect(_button_card[5], SIGNAL (clicked()), this, SLOT (withdrawal200()));
    disconnect(_button_card[6], SIGNAL (clicked()), this, SLOT (saldo()));
-   connect(_button_card[6], SIGNAL (clicked()), this, SLOT (wyplata500()));
+   connect(_button_card[6], SIGNAL (clicked()), this, SLOT (withdrawal500()));
 
    QObject* button = QObject::sender();
    if (button == MainWindow::_button_card[7])
@@ -313,29 +315,34 @@ void MainWindow::buttonBclicked()
 
 }
 
-void MainWindow::wyplata20()
+void MainWindow::withdrawal20()
 {
     cash_withdrawal(20);
 }
 
-void MainWindow::wyplata50()
+void MainWindow::withdrawal50()
 {
     cash_withdrawal(50);
 }
 
-void MainWindow::wyplata100()
+void MainWindow::withdrawal100()
 {
     cash_withdrawal(100);
 }
 
-void MainWindow::wyplata200()
+void MainWindow::withdrawal200()
 {
     cash_withdrawal(200);
 }
 
-void MainWindow::wyplata500()
+void MainWindow::withdrawal500()
 {
     cash_withdrawal(500);
+}
+
+void MainWindow::withdrawal50_without_receipt()
+{
+    cash_withdrawal(50);
 }
 
 int MainWindow::cash_withdrawal(int quantity,  bool receipt)
