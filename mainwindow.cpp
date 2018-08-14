@@ -30,13 +30,6 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    // TOSTY
-    // Przrelozyc cala inicjalizacje drugiego okna do konstruktora a w oknie main wywolac tylko window_atm->show()
-    buttoA = 0;
-    buttonB = 0;
-
-    butonierka = new QPushButton(window_atm);
-
     // -------------------------------------------- LogIn window ---------------------------------------------------------
     // ustawiamy maxymalna liczbe znakow, PIN = 4 znaki
     ui->line_password->setMaxLength(4);
@@ -298,21 +291,6 @@ void MainWindow::logout()
 {
     QMessageBox::information(this, "Logout", "See you");
     QCoreApplication::quit();
-}
-
-void MainWindow::buttonAclicked()
-{
-    buttoA = 1;
-    if (buttoA == 1)
-    {
-        _button_card[7]->setEnabled(true);
-    }
-
-}
-
-void MainWindow::buttonBclicked()
-{
-
 }
 
 void MainWindow::withdrawal20()

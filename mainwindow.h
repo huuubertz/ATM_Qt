@@ -18,10 +18,6 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-public slots:
-    void buttonAclicked();
-    void buttonBclicked();
-
 private slots:
 
     void on_pushButton_ok_logIn_clicked(bool checked);
@@ -62,8 +58,6 @@ private:
     QPushButton* button = NULL;
     QPushButton *_button_card[12];
     QLabel *_label[8];
-    int buttoA, buttonB;
-    QPushButton* butonierka = NULL;
 
     int cash_withdrawal(int quantity=0, bool receipt=false);
     void _set_disabled_to_all_card_buttons(int numbers=8);
