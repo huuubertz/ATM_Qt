@@ -11,6 +11,7 @@ protected:
 	// latwiej bedzie sprawdzic poprawnosc pin'u
 	int _m_password;
     int _m_saldo;
+    int _m_last_withdrawal;
 public:
 	Card()
 	{
@@ -24,6 +25,8 @@ public:
 	virtual void about_transaction() = 0;
     virtual void set_saldo(double valude) = 0;
     virtual double get_saldo() = 0;
+    virtual void set_last_withdrawal(int value) = 0;
+    virtual int get_last_withdrawal() = 0;
 
 };
 
@@ -66,6 +69,13 @@ public:
         return _m_saldo;
     }
 
+    void set_last_withdrawal(int value) {
+        _m_last_withdrawal = value;
+    }
+
+    int get_last_withdrawal() {
+        return _m_last_withdrawal;
+    }
 };
 
 class Factory{

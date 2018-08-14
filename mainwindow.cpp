@@ -7,6 +7,7 @@
 #include <QLineEdit>
 #include <QMessageBox>
 #include <string>
+#include <fstream>
 
 // My libs
 #include "Singleton.h"
@@ -340,6 +341,7 @@ int MainWindow::cash_withdrawal(int quantity,  bool receipt)
         _clear_all_labels();
         _button_card[9]->setEnabled(true);
         _button_card[10]->setEnabled(true);
+        card->set_last_withdrawal(quantity);
         return card->get_saldo();
     }
 }
@@ -369,4 +371,14 @@ void MainWindow::collect_money()
 void MainWindow::get_receipt()
 {
     _button_card[9]->setEnabled(false);
+
+    std::ofstream* myfile = new std::ofstream("receipt.txt");
+
+    if (myfile->is_open())
+    {
+        *myfile << std::to_string(card->get_last_withdrawal());
+        myfile->close();
+    }
+
+    else QMessageBox::information(this, "Wrong", "Unable to write to file");
 }

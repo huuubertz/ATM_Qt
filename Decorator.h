@@ -41,6 +41,14 @@ public:
         return _m_card->get_saldo();
     }
 
+    void set_last_withdrawal(int value) {
+        _m_card->set_last_withdrawal(value);
+    }
+
+    int get_last_withdrawal() {
+        return _m_card->get_last_withdrawal();
+    }
+
 	virtual Card* create_individual_account_with_wrapp() = 0;
 };
 
