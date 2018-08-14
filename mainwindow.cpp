@@ -14,12 +14,13 @@
 #include "Card.h"
 #include "Decorator.h"
 
+// Create of server instance (Singleton DP)
 Server* Server::_instance = 0;
 
-// Create global instance of Card to TEST
+// Create global instance of Card to TEST, one of them is with PL wrapper (Decorator DP) created by fabryka (Factory DP).
 Factory* fabryka = NULL;
 
-Card* card_1 = fabryka->create_individual_card();
+Card* card_1 = new Wrapper_PL(fabryka->create_individual_card());
 Card* card_2 = fabryka->create_individual_card();
 Card* card_3 = fabryka->create_individual_card();
 
