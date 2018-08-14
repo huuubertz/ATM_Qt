@@ -296,27 +296,27 @@ void MainWindow::logout()
 
 void MainWindow::withdrawal20()
 {
-    cash_withdrawal(20);
+    cash_withdrawal(20, true);
 }
 
 void MainWindow::withdrawal50()
 {
-    cash_withdrawal(50);
+    cash_withdrawal(50, true);
 }
 
 void MainWindow::withdrawal100()
 {
-    cash_withdrawal(100);
+    cash_withdrawal(100, true);
 }
 
 void MainWindow::withdrawal200()
 {
-    cash_withdrawal(200);
+    cash_withdrawal(200, true);
 }
 
 void MainWindow::withdrawal500()
 {
-    cash_withdrawal(500);
+    cash_withdrawal(500, true);
 }
 
 void MainWindow::withdrawal50_without_receipt()
@@ -333,15 +333,26 @@ int MainWindow::cash_withdrawal(int quantity,  bool receipt)
 
     else
     {
+        // Change of acctual saldo on card.
         card->set_saldo(card->get_saldo() - quantity);
         QString qbalance = QString::number(card->get_saldo());
         QMessageBox::information(this, "Ok", qbalance);
 
+        // turn off all buttons.
         _set_disabled_to_all_card_buttons(8);
         _clear_all_labels();
-        _button_card[9]->setEnabled(true);
+
+        if (receipt)
+        {
+            _button_card[9]->setEnabled(true);
+        }
+
+        // Enable opt. collect money.
         _button_card[10]->setEnabled(true);
+
+        // save last withdrawal (log)
         card->set_last_withdrawal(quantity);
+
         return card->get_saldo();
     }
 }
