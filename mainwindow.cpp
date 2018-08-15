@@ -423,9 +423,12 @@ void MainWindow::cash_payment()
 
 void MainWindow::on_ok_button_clicked()
 {
-    QString amount_of_payment = line->text();
-
-    QMessageBox::information(this, "Saldo", amount_of_payment);
-
-    //card->set_saldo(amount_of_payment);
+    // Get int value of text from line edit
+    int amount_of_payment = line->text().toInt();
+    // change actual saldo on card
+    card->set_saldo(card->get_saldo() + amount_of_payment);
+    // show actual saldo on card
+    QMessageBox::information(this, "Saldo", QString::number(card->get_saldo()));
+    // close cash payment window
+    window_of_payment->close();
 }
