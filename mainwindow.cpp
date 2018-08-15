@@ -290,6 +290,8 @@ void MainWindow::cash_withdrawal_window() {
    connect(_button_card[5], SIGNAL (clicked()), this, SLOT (withdrawal200()));
    disconnect(_button_card[6], SIGNAL (clicked()), this, SLOT (saldo()));
    connect(_button_card[6], SIGNAL (clicked()), this, SLOT (withdrawal500()));
+   disconnect(_button_card[7], SIGNAL (clicked()), this, SLOT (cash_payment()));
+   connect(_button_card[7], SIGNAL (clicked()), this, SLOT (other_value()));
 
    QObject* button = QObject::sender();
    if (button == MainWindow::_button_card[7])
@@ -307,8 +309,21 @@ void MainWindow::saldo() {
 
 void MainWindow::logout()
 {
-    QMessageBox::information(this, "Logout", "See you");
-    QCoreApplication::quit();
+    if(_button_card[9]->isEnabled())
+    {
+        QMessageBox::information(this, "Warning", "Get receipt!");
+    }
+
+    else if(_button_card[10]->isEnabled())
+    {
+        QMessageBox::information(this, "Warning", "Collect money!");
+    }
+
+    else
+    {
+        QMessageBox::information(this, "Logout", "See you");
+        QCoreApplication::quit();
+    }
 }
 
 void MainWindow::withdrawal20()
@@ -334,6 +349,21 @@ void MainWindow::withdrawal200()
 void MainWindow::withdrawal500()
 {
     cash_withdrawal(500, true);
+}
+
+void MainWindow::other_value()
+{
+    window_of_payment->show();
+
+    disconnect(ok_button, SIGNAL (clicked()), this, SLOT (on_ok_button_clicked()));
+    //connect(ok_button, SIGNAL (clicked()), this, SLOT (cash_withdrawal()));
+
+
+    if (ok_button->isCheckable()) {
+        int amount_of_payment = line->text().toInt();
+        cash_withdrawal(amount_of_payment, true);
+    }
+
 }
 
 void MainWindow::withdrawal50_without_receipt()
@@ -429,6 +459,8 @@ void MainWindow::on_ok_button_clicked()
     card->set_saldo(card->get_saldo() + amount_of_payment);
     // show actual saldo on card
     QMessageBox::information(this, "Saldo", QString::number(card->get_saldo()));
+    // clear line edit
+    line->clear();
     // close cash payment window
     window_of_payment->close();
 }
