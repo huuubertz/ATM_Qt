@@ -33,11 +33,11 @@ public:
 		return _m_card->get_ID();
 	}
 
-    void set_saldo(double valude) {
+    void set_saldo(int valude) {
         _m_card->set_saldo(valude);
     }
 
-    double get_saldo() {
+    int get_saldo() {
         return _m_card->get_saldo();
     }
 

@@ -23,8 +23,8 @@ public:
 	virtual int get_ID() = 0;
 	virtual void about_account() = 0;
 	virtual void about_transaction() = 0;
-    virtual void set_saldo(double valude) = 0;
-    virtual double get_saldo() = 0;
+    virtual void set_saldo(int valude) = 0;
+    virtual int get_saldo() = 0;
     virtual void set_last_withdrawal(int value) = 0;
     virtual int get_last_withdrawal() = 0;
 
@@ -61,11 +61,11 @@ public:
 		std::cout << "about transaction" << std::endl;
 	}
 
-    void set_saldo(double value) {
+    void set_saldo(int value) {
         _m_saldo = value;
     }
 
-    double get_saldo() {
+    int get_saldo() {
         return _m_saldo;
     }
 
