@@ -1,0 +1,9 @@
+Co bym zmienil?
+Dodalbym klase Atm, ktora zajmowala by sie obsluga takich metod jak wyplata pieniedzy wplata.
+Poprawilo by to czytelnosc kodu i tak to powinno wygladac xd.
+
+Zalozenia i krotki opis,
+Link do gita,
+dziedzina i jak zastosowalem wzorce,
+jeden flow chart,
+co bym zmienil.

@@ -302,7 +302,7 @@ void MainWindow::saldo() {
 
     std::string balance = std::to_string(card->get_saldo());
     QString qbalance = QString::fromStdString(balance);
-    QMessageBox::information(this, "Saldo", qbalance, 'd', 2);
+    QMessageBox::information(this, "Saldo", qbalance);
 }
 
 void MainWindow::logout()
@@ -413,7 +413,7 @@ void MainWindow::get_receipt()
 
 void MainWindow::other()
 {
-
+    QMessageBox::information(this, "Sorry", "In development");
 }
 
 void MainWindow::cash_payment()
