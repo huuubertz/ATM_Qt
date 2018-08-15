@@ -356,14 +356,19 @@ void MainWindow::other_value()
     window_of_payment->show();
 
     disconnect(ok_button, SIGNAL (clicked()), this, SLOT (on_ok_button_clicked()));
-    //connect(ok_button, SIGNAL (clicked()), this, SLOT (cash_withdrawal()));
+    connect(ok_button, SIGNAL (clicked()), this, SLOT (withdrawal_other_value()));
+}
 
-
-    if (ok_button->isCheckable()) {
-        int amount_of_payment = line->text().toInt();
-        cash_withdrawal(amount_of_payment, true);
-    }
-
+void MainWindow::withdrawal_other_value()
+{
+    // Get int value of text from line edit
+    int amount_of_payment = line->text().toInt();
+    // clear line edit
+    line->clear();
+    // close cash payment window
+    window_of_payment->close();
+    // Try to get a money
+    cash_withdrawal(amount_of_payment, true);
 }
 
 void MainWindow::withdrawal50_without_receipt()

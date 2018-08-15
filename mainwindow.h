@@ -43,6 +43,8 @@ private slots:
 
     void other_value();
 
+    void withdrawal_other_value();
+
     void withdrawal50_without_receipt();
 
     void collect_money();
