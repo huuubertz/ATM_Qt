@@ -55,6 +55,8 @@ private slots:
 
     void cash_payment();
 
+    void on_ok_button_clicked();
+
     void logout();
 
 private:

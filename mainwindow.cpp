@@ -152,6 +152,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(_button_card[8], SIGNAL (clicked()), this, SLOT (logout()));
     connect(_button_card[9], SIGNAL (clicked()), this, SLOT (get_receipt()));
     connect(_button_card[10], SIGNAL (clicked()), this, SLOT (collect_money()));
+
+    connect(ok_button, SIGNAL (clicked()), this, SLOT (on_ok_button_clicked()));
 }
 
 MainWindow::~MainWindow()
@@ -417,4 +419,13 @@ void MainWindow::other()
 void MainWindow::cash_payment()
 {
     window_of_payment->show();
+}
+
+void MainWindow::on_ok_button_clicked()
+{
+    QString amount_of_payment = line->text();
+
+    QMessageBox::information(this, "Saldo", amount_of_payment);
+
+    //card->set_saldo(amount_of_payment);
 }
