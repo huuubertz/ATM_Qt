@@ -9,6 +9,8 @@
 #include <string>
 #include <fstream>
 #include <iomanip> // setprecision
+#include <QFile>
+#include <QTextStream>
 
 // My libs
 #include "Singleton.h"
@@ -435,14 +437,15 @@ void MainWindow::get_receipt()
 {
     _button_card[9]->setEnabled(false);
 
-    std::ofstream* myfile = new std::ofstream("receipt.txt");
+    // NIESTETY ZAHARDCODOWANA WARTOSC NIE PRZENIESIONA DO ${CURDIR}
+    QString path = "C:\\Users\\huuub\\Desktop\\receipt.txt";
+    QFile myfile(path);
 
-    if (myfile->is_open())
+    if (myfile.open(QFile::Append | QFile::Text))
     {
-        *myfile << std::to_string(card->get_last_withdrawal());
-        myfile->close();
+        QTextStream out(&myfile);
+        out << QString::number(card->get_last_withdrawal())+"\n";
     }
-
     else QMessageBox::information(this, "Wrong", "Unable to write to file");
 }
 
